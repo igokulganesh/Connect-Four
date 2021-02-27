@@ -7,10 +7,12 @@ var player2 = "Yellow" ;
 var game_on = true;
 var table = $('table tr');
 var winning_array = [] ; 
+var audio ; 
 
 // Change the color of a button
 function changeColor(row, col, color) 
 {
+    audio.play();
     return table.eq(row).find('td').eq(col).find('button').css('background-color', color);
 }
 
@@ -200,12 +202,22 @@ function move()
 
 $('.board button').on('click', move )
 
-
-function Start() 
-{
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
 }
 
 window.onload = function() 
 {
-    Start();
+    audio = new sound("Assert/dot.mpeg");
 };

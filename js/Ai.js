@@ -2,6 +2,7 @@ var player1Color = 'rgb(237, 9, 9)';
 var player2Color = 'rgb(229, 255, 0)';
 
 var table = $('table tr');
+var audio ; 
 
 function Game() 
 {
@@ -47,6 +48,7 @@ Game.prototype.changeColor = function(row, col, Player)
     var color = player1Color ; 
     if(Player == 1)
         color = player2Color ;
+    audio.play();
 
     table.eq(row).find('td').eq(col).find('button').css('background-color', color);
 }
@@ -213,12 +215,30 @@ Game.prototype.minimizePlay = function(board, depth)
     return min;
 }
 
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
+}
+
+
 window.onload = function() 
 {
     $("#retext").hide(); // Restart Game text initially hide when game over it will show
 
     // Start with Human
     $('#whoPlay').text("Your Turn");
+
+    audio = new sound("Assert/dot.mpeg");
 
     window.Game = new Game();
 
