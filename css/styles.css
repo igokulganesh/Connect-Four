@@ -72,3 +72,57 @@ body{
     padding: 3vh 0;
     font-weight: lighter
 }
+
+.win {
+    border-radius: 50%;
+    animation: animationFrames 1s infinite;
+    -webkit-animation: animationFrames 1s infinite;
+    -moz-animation: animationFrames 1s infinite;
+    -o-animation: animationFrames 1s infinite;
+    -ms-animation: animationFrames 1s infinite;
+}
+
+@keyframes animationFrames{
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-moz-keyframes animationFrames{
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-webkit-keyframes animationFrames {
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-o-keyframes animationFrames {
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}
+
+@-ms-keyframes animationFrames {
+    50% {
+        opacity:0.6;
+    }
+    100% {
+        opacity:1;
+    }
+}

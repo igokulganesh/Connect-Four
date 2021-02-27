@@ -6,6 +6,7 @@ var player2 = "Yellow" ;
 
 var game_on = true;
 var table = $('table tr');
+var winning_array = [] ; 
 
 // Change the color of a button
 function changeColor(row, col, color) 
@@ -49,6 +50,10 @@ function horizontalWinCheck()
         {
             if (colorMatchCheck(returnColor(row,col), returnColor(row,col+1) ,returnColor(row,col+2), returnColor(row,col+3))) 
             {
+                winning_array.push([row, col]);
+                winning_array.push([row, col+1]);
+                winning_array.push([row, col+2]);
+                winning_array.push([row, col+3]);
                 return true;
             }
         }
@@ -65,6 +70,10 @@ function verticalWinCheck()
         {
             if(colorMatchCheck(returnColor(row,col), returnColor(row+1,col) ,returnColor(row+2,col), returnColor(row+3,col))) 
             {
+                winning_array.push([row, col]);
+                winning_array.push([row+1, col]);
+                winning_array.push([row+2, col]);
+                winning_array.push([row+3, col]);
                 return true;
             }
         }
@@ -81,10 +90,18 @@ function diagonalWinCheck()
         {
             if (colorMatchCheck(returnColor(row,col), returnColor(row+1,col+1) ,returnColor(row+2,col+2), returnColor(row+3,col+3))) 
             {
+                winning_array.push([row, col]);
+                winning_array.push([row+1, col+1]);
+                winning_array.push([row+2, col+2]);
+                winning_array.push([row+3, col+3]);
                 return true;
             }
             else if (colorMatchCheck(returnColor(row,col), returnColor(row-1,col+1) ,returnColor(row-2,col+2), returnColor(row-3,col+3))) 
             {
+                winning_array.push([row, col]);
+                winning_array.push([row-1, col+1]);
+                winning_array.push([row-2, col+2]);
+                winning_array.push([row-3, col+3]);
                 return true;
             }
         }
@@ -105,6 +122,14 @@ function isTie()
 // Game End
 function gameEnd(winningPlayer) 
 {
+    var row, col ; 
+    for (var i = 0; i < winning_array.length; i++) 
+    {
+        row = winning_array[i][0] ; 
+        col = winning_array[i][1] ; 
+        table.eq(row).find('td').eq(col).find('button').addClass("win");  
+    }
+
     $('.board button').unbind();
     $('#myModal').modal('show'); 
     $('#whoWins').text(winningPlayer);

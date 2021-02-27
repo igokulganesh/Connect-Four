@@ -27,11 +27,11 @@ Game.prototype.move = function()
 
     if(game.turn === 1 ) // computer's turn
     {
-        $('#whoPlay').text("Computer's Turn");
+        /*$('#whoPlay').text("Computer's Turn");*/
         $(".board button").off("click", game.move);
         game.AiMove()
         $('.board button').on('click', game.move);
-        $('#whoPlay').text("Your Turn");
+        /*$('#whoPlay').text("Your Turn");*/
     }
 };
 
@@ -48,11 +48,20 @@ Game.prototype.changeColor = function(row, col, Player)
     if(Player == 1)
         color = player2Color ;
 
-    return table.eq(row).find('td').eq(col).find('button').css('background-color', color);
+    table.eq(row).find('td').eq(col).find('button').css('background-color', color);
 }
 
 Game.prototype.gameEnd = function(winningPlayer) 
 {
+    var row, col ; 
+    for (var i = 0; i < game.winning_array.length; i++) 
+    {
+        row = game.winning_array[i][0] ; 
+        col = game.winning_array[i][1] ; 
+        table.eq(row).find('td').eq(col).find('button').addClass("win");  
+    }
+
+
     $('.board button').unbind();
     $('#myModal').modal('show'); 
     $('#whoWins').text(winningPlayer);
@@ -123,7 +132,7 @@ Game.prototype.updateStatus = function()
 
     // Computer won
     else if (game.board.score() == game.score) 
-        game.gameEnd("You loss!");
+        game.gameEnd("Computer Won!");
 
     // Tie
     else if (game.board.isFull()) 
@@ -133,15 +142,6 @@ Game.prototype.updateStatus = function()
     return true ; 
 }
 
-Game.prototype.markWin = function() 
-{
-    document.getElementById('game_board').className = "finished";
-    for (var i = 0; i < game.winning_array.length; i++) 
-    {
-        var name = document.getElementById('game_board').rows[game.winning_array[i][0]].cells[game.winning_array[i][1]].className;
-        document.getElementById('game_board').rows[game.winning_array[i][0]].cells[game.winning_array[i][1]].className = name + " win";
-    }
-}
 
 Game.prototype.AiMove = function() 
 {
