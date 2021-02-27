@@ -47,9 +47,10 @@ Game.prototype.changeColor = function(row, col, Player)
 {
     var color = player1Color ; 
     if(Player == 1)
+    {
         color = player2Color ;
-    audio.play();
-
+        audio.play();
+    }
     table.eq(row).find('td').eq(col).find('button').css('background-color', color);
 }
 
