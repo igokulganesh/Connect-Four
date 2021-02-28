@@ -86,9 +86,11 @@ function verticalWinCheck()
 // Check for Diagonal Wins
 function diagonalWinCheck() 
 {
-    for (var col = 0; col < 5; col++) 
+
+    //left - bottom 
+    for (var row = 0; row < 3; row++) 
     {
-        for (var row = 0; row < 7; row++) 
+        for (var col = 0; col < 4; col++) 
         {
             if (colorMatchCheck(returnColor(row,col), returnColor(row+1,col+1) ,returnColor(row+2,col+2), returnColor(row+3,col+3))) 
             {
@@ -98,7 +100,15 @@ function diagonalWinCheck()
                 winning_array.push([row+3, col+3]);
                 return true;
             }
-            else if (colorMatchCheck(returnColor(row,col), returnColor(row-1,col+1) ,returnColor(row-2,col+2), returnColor(row-3,col+3))) 
+        }            
+    }
+
+    // right - bottom 
+    for (var row = 3; row < 6; row++) 
+    {
+        for (var col = 0; col < 4 ; col++) 
+        {
+            if (colorMatchCheck(returnColor(row,col), returnColor(row-1,col+1) ,returnColor(row-2,col+2), returnColor(row-3,col+3))) 
             {
                 winning_array.push([row, col]);
                 winning_array.push([row-1, col+1]);
@@ -107,7 +117,9 @@ function diagonalWinCheck()
                 return true;
             }
         }
+
     }
+
     return false ; 
 }
 

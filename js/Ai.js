@@ -69,7 +69,7 @@ Game.prototype.gameEnd = function(winningPlayer)
     $('#myModal').modal('show'); 
     $('#whoWins').text(winningPlayer);
     $('#whoPlay').text(winningPlayer);
-    $("#retext").show();
+    $("#retext").text("Restart the Game to Play Again!");
 };
 
 
@@ -234,7 +234,7 @@ function sound(src) {
 
 window.onload = function() 
 {
-    $("#retext").hide(); // Restart Game text initially hide when game over it will show
+    //$("#retext").hide(); // Restart Game text initially hide when game over it will show
 
     // Start with Human
     $('#whoPlay').text("Your Turn");

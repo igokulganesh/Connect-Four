@@ -33,39 +33,53 @@
           <li>click to drop your piece</li>
           <li>When you can connect four pieces vertically, horizontally or diagonally you win</li>
         </ul>
-        <a class="btn btn-outline-warning" href="#" role="button">Play With Friend</a>
-        <a class="btn btn-warning" href="computer.html" role="button">Play With Computer</a>
-        <a class="btn btn-warning" href="Game.html" role="button">Restart Game</a>
       </div>
-
     </div>
 
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="card">
-                <div class="card-img"> 
-                  <img class="img-fluid" src="https://i.imgur.com/4niebFr.jpg" alt="Nice!">                  
-                  <!-- <img class="img-fluid" src="Assert/Logo.png" alt="Nice!">  -->
-                </div>
-                <div class="card-title">
-                    <p>Success!</p>
-                </div>
+    <div align="center" style="width: 100%;">
+          <a class="btn btn-outline-warning btn-lg" href="" role="button">Play With Friend</a>
+          <a class="btn btn-warning btn-lg" href="computer.html" role="button">Play With Computer</a>
+    </div>
 
-                <div class="card-text">
-                    <p>Yay! It's a nice Game! <br>
-                      <b> <span id='whoWins'>Red won!</span></b>
-                    </p>
-                </div>
-                <!-- <a class="btn btn-warning btn-lg" href="Game.html" role="button">Restart</a> -->
-            </div>
+    <div align="center">
+      <br>
+      <a class="btn btn-lg" href="Game.html" style="background-color: #13d119" role="button">Restart Game</a>
+    </div>
+
+<!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+  </button>  -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content" align="center">                 
+          <img class="img-fluid" src="Assert/Logo.png" alt="Nice!"> 
+        <div class="card-title" align="center">
+            <p>Success!</p>
         </div>
+        <div class="card-text">
+            <p>Yay! It's a nice Game! <br>
+              <b><span id='whoWins'>Red won!</span></b>              
+            </p>
+        </div>
+        <div class="container">
+          <a class="btn btn-lg" href="Game.html" role="button" style="background-color: #43a5de">Play Again</a>
+          <br>
+        </div>
+        <br>
+      </div>
     </div>
+  </div>
 
 
 
     <div id="board" class="container" align="center">
+      <br>
       <h2 id='whoPlay'>Red player's Turn</h2>
-       <p id='retext'>Restart the Game to Play Again</p>
+      <p id='retext'>Restart the Game to Play Again</p>
+      <br>
+
       <table class="board">
         <tr>
           <td><button type="button"></button></td>
