@@ -2,10 +2,8 @@
   Connect four is a two player connection board game, in which the players choose a color and then take turns dropping colored discs into a seven-column, six-row vertically suspended grid. The pieces fall straight down, occupying the lowest available space within the column. The objective of the game is to be the first to form a horizontal, vertical, or diagonal line of four of one's own discs.
  
 # Game modes
-<ol>
-<li>Play with friends.</li>
-<li>Play with Computer (Using Minimax Algorithm)</li>
-</ol>
+- Play with [friends](https://igokulganesh.github.io/Connect-Four/Game)
+- Play with [Computer](https://igokulganesh.github.io/Connect-Four/computer) (Using Minimax Algorithm)
 
 # Minimax Algorithm 
 - Mini-max algorithm is a recursive or backtracking algorithm which is used in decision-making and game theory. It provides an optimal move for the player assuming that opponent is also playing optimally.
@@ -19,5 +17,6 @@
 
 
 ## wanna play?
-https://igokulganesh.github.io/Connect-Four/computer
+click [here](https://igokulganesh.github.io/Connect-Four/computer)
+
 
