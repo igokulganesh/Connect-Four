@@ -6,7 +6,7 @@ var audio ;
 
 function Game() 
 {
-    this.depth = 4; // Search depth
+    this.depth = 5; // Search depth
     this.score = 100000; // Win/loss score
     this.turn = 0; // 0: Human, 1: Computer
     this.winning_array = []; // Winning (chips) array
@@ -22,9 +22,8 @@ Game.prototype.move = function()
     var col = $(this).closest("td").index();
 
     if(game.turn === 0)
-    {
         game.ManMove(col);   
-    }
+    
 
     if(game.turn === 1 ) // computer's turn
     {
@@ -46,7 +45,7 @@ Game.prototype.returnColor = function(row, col)
 Game.prototype.changeColor = function(row, col, Player) 
 {
     var color = player1Color ; 
-    if(Player == 1)
+    if(Player === 1)
     {
         color = player2Color ;
         audio.play();
@@ -108,10 +107,8 @@ Game.prototype.ManMove = function(col)
             }
         }
 
-        if (!game.board.place(col)) // check invalid move 
-        {
+        if (!game.board.place(col)) // make move and check invalid move 
             return null ;
-        }
 
         game.turn = game.switchRound(game.turn);
         game.updateStatus();
@@ -150,12 +147,12 @@ Game.prototype.AiMove = function()
 {
     if(game.board.score() != game.score && game.board.score() != -game.score && !game.board.isFull()) 
     {
-        var ai_move = game.maximizePlay(game.board, game.depth);
+        var ai_move = game.maximizePlay(game.board, game.depth, -game.score, game.score);
         game.ManMove(ai_move[0]);
     }
 }
 
-Game.prototype.maximizePlay = function(board, depth) 
+Game.prototype.maximizePlay = function(board, depth, alpha, beta) 
 {
     // Call score of our board
     var score = board.score();
@@ -165,7 +162,7 @@ Game.prototype.maximizePlay = function(board, depth)
         return [null, score];
 
     // col, Score
-    var max = [null, -99999];
+    var max = [null, -game.score];
 
     // For all possible moves
     for (var col = 0; col < 7; col++) 
@@ -174,20 +171,24 @@ Game.prototype.maximizePlay = function(board, depth)
 
         if (new_board.place(col)) 
         {
-            var next_move = game.minimizePlay(new_board, depth - 1); 
+            var next_move = game.minimizePlay(new_board, depth - 1, alpha, beta); 
 
             // Evaluate new move
             if (max[0] == null || next_move[1] > max[1]) 
             {
                 max[0] = col;
                 max[1] = next_move[1];
+                alpha = next_move[1];
             }
+
+            if (alpha >= beta) 
+                return max;
         }
     }
     return max;
 }
 
-Game.prototype.minimizePlay = function(board, depth) 
+Game.prototype.minimizePlay = function(board, depth, alpha, beta) 
 {
     var score = board.score();
 
@@ -195,7 +196,7 @@ Game.prototype.minimizePlay = function(board, depth)
         return [null, score];
 
     // col, score
-    var min = [null, 99999];
+    var min = [null, game.score];
 
     for (var col = 0; col < 7; col++) 
     {
@@ -203,14 +204,17 @@ Game.prototype.minimizePlay = function(board, depth)
 
         if (new_board.place(col)) 
         {
-            var next_move = game.maximizePlay(new_board, depth - 1);
+            var next_move = game.maximizePlay(new_board, depth - 1, alpha, beta);
 
             if (min[0] == null || next_move[1] < min[1]) 
             {
                 min[0] = col;
                 min[1] = next_move[1];
+                beta = next_move[1]; 
             }
 
+            if( alpha >= beta )
+                return min ; 
         }
     }
     return min;

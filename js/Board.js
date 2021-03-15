@@ -10,7 +10,7 @@ Board.prototype.isFull = function()
 {
     for (var i = 0; i < 7 ; i++) //cols 
     {
-        if (this.b[0][i] == null) 
+        if (this.b[0][i] === null) 
         {
             return false;
         }
@@ -31,11 +31,11 @@ Board.prototype.isFinished = function(depth, score)
 Board.prototype.place = function(col) 
 {
     // Check if col valid
-    if (this.b[0][col] == null && col >= 0 && col < 7) 
+    if (this.b[0][col] === null && col >= 0 && col < 7) 
     {
         for (var i = 5 ; i >= 0; i--) 
         {
-            if (this.b[i][col] == null) 
+            if (this.b[i][col] === null) 
             {
                 this.b[i][col] = this.player ; 
                 break; 
@@ -44,10 +44,7 @@ Board.prototype.place = function(col)
         this.player = this.game.switchRound(this.player);
         return true;
     } 
-    else 
-    {
-        return false;
-    }
+    return false;
 }
 
 // Return a score for various positions either horizontal, vertical or diagonal 
@@ -63,12 +60,12 @@ Board.prototype.scorePosition = function(row, col, delta_y, delta_x)
     // Determine score through amount of available chips
     for (var i = 0; i < 4; i++) 
     {
-        if (this.b[row][col] == 0) 
+        if (this.b[row][col] === 0) 
         {
             this.game.winning_array_human.push([row, col]);
             human_points++; 
         } 
-        else if (this.b[row][col] == 1) 
+        else if (this.b[row][col] === 1) 
         {
             this.game.winning_array_cpu.push([row, col]);
             computer_points++; 
@@ -79,23 +76,18 @@ Board.prototype.scorePosition = function(row, col, delta_y, delta_x)
     }
 
     // Marking winning/returning score
-    if (human_points == 4) 
+    if (human_points === 4) 
     {
         this.game.winning_array = this.game.winning_array_human;
-        // Computer won (100000)
         return -this.game.score;
     } 
-    else if (computer_points == 4) 
+    else if (computer_points === 4) 
     {
         this.game.winning_array = this.game.winning_array_cpu;
-        // Human won (-100000)
         return this.game.score;
     } 
     else 
-    {
-        // Return normal points
         return computer_points;
-    }
 }
 
 // Returns the overall score for our board.
@@ -129,11 +121,8 @@ Board.prototype.score = function()
             // score the column and add it to the points
             var score = this.scorePosition(row, col, 1, 0);
 
-            if (score == this.game.score) 
-            	return this.game.score;
-            
-            if (score == -this.game.score) 
-            	return -this.game.score;
+            if (score === this.game.score || score === -this.game.score) 
+            	return score ; 
             
             vertical_points += score;
         }            
@@ -156,11 +145,9 @@ Board.prototype.score = function()
         { 
             var score = this.scorePosition(row, col, 0, 1);   
         
-            if (score == this.game.score) 
-            	return this.game.score;
+            if (score === this.game.score || score === -this.game.score) 
+                return score ; 
 
-            if (score == -this.game.score) 
-            	return -this.game.score;
             horizontal_points += score;
         } 
     }
@@ -183,11 +170,8 @@ Board.prototype.score = function()
         {
             var score = this.scorePosition(row, col, 1, 1);
 
-            if (score == this.game.score) 
-            	return this.game.score;
-
-            if (score == -this.game.score) 
-            	return -this.game.score;
+            if (score === this.game.score || score === -this.game.score) 
+                return score ; 
 
             diagonal_points1 += score;
         }            
@@ -207,17 +191,13 @@ Board.prototype.score = function()
     {
         for (var col = 0; col < 4 ; col++) 
         {
-            var score = this.scorePosition(row, col, -1, +1);
+            var score = this.scorePosition(row, col, -1, 1);
 
-            if (score == this.game.score) 
-            	return this.game.score;
-            
-            if (score == -this.game.score) 
-            	return -this.game.score;
+            if (score === this.game.score || score === -this.game.score) 
+                return score ; 
             
             diagonal_points2 += score;
         }
-
     }
 
     return horizontal_points + vertical_points + diagonal_points1 + diagonal_points2 ;
