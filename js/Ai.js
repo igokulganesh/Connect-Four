@@ -6,7 +6,7 @@ var audio ;
 
 function Game() 
 {
-    this.depth = 6; // Search depth
+    this.depth = 5; // Search depth
     this.score = 100000; // Win/loss score
     this.turn = 0; // 0: Human, 1: Computer
     this.winning_array = []; // Winning (chips) array
