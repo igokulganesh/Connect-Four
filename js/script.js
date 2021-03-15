@@ -31,7 +31,7 @@ function checkBottom(col)
         color = returnColor(row, col);
         if (color === 'rgb(255, 255, 255)') 
         {
-            return row
+            return row ; 
         }
     }
     return -1 ; 
@@ -189,9 +189,7 @@ function move()
     var bottomAvail = checkBottom(col);
 
     if(bottomAvail !== -1)
-    {
         changeColor(bottomAvail, col, currentColor);
-    }    
 
     // Check for a win or a tie.
     if(horizontalWinCheck() || verticalWinCheck() || diagonalWinCheck()) 
@@ -201,12 +199,12 @@ function move()
     }
 
     if(bottomAvail !== -1)
-    {
-        changePlayer()
-    }
+        changePlayer();
+    
 
     if(isTie())
     {
+        game.winning_array = [] ; 
         gameEnd("Game Tied!");
         return true ; 
     }
