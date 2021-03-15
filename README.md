@@ -26,6 +26,6 @@
 
 
 ## wanna play?
-click [here](https://igokulganesh.github.io/Connect-Four/computer)
+Click [here](https://igokulganesh.github.io/Connect-Four/computer)
 
 
